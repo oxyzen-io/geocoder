@@ -54,6 +54,7 @@ module Geocoder
         :test,
         :latlon,
         :amap
+        :naver,
       ]
     end
 
