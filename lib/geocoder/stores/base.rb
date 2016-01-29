@@ -99,6 +99,14 @@ module Geocoder
         end
         results = Geocoder.search(query, query_options)
 
+        # If result is Korea, we use Naver rather than the setting by force.
+        if !reverse and results.present? and results.first.country_code == 'KR'
+          begin
+            results = Geocoder::Lookup::Naver.new.search(query, query_options)
+          rescue
+          end
+        end
+
         # execute custom block, if specified in configuration
         block_key = reverse ? :reverse_block : :geocode_block
         if custom_block = options[block_key]
@@ -113,4 +121,3 @@ module Geocoder
     end
   end
 end
-
