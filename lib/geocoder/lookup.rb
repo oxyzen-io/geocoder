@@ -45,6 +45,7 @@ module Geocoder
         :okf,
         :postcode_anywhere_uk,
         :naver,
+        :geoportail_lu,
         :test
       ]
     end
