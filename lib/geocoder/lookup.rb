@@ -45,7 +45,8 @@ module Geocoder
         :postcode_anywhere_uk,
         :naver,
         :geoportail_lu,
-        :test
+        :test,
+        :latlon
       ]
     end
 
