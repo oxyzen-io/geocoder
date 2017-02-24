@@ -9,19 +9,26 @@ module Geocoder::Lookup
     end
 
     def required_api_key_parts
-      ["key"]
+      ["client_id", "client_secret"]
     end
 
     def query_url(query)
       (query.reverse_geocode? ?
-        "#{protocol}://openapi.map.naver.com/api/reversegeocode?" :
-        "#{protocol}://openapi.map.naver.com/api/geocode?") +
+        "#{protocol}://openapi.map.naver.com/v1/map/reversegeocode?" :
+        "#{protocol}://openapi.map.naver.com/v1/map/geocode?") +
       url_query_string(query)
+    end
+
+    def http_headers
+      super.merge({
+        :"X-Naver-Client-Id" => configuration.client_id,
+        :"X-Naver-Client-Secret" => configuration.client_secret
+      })
     end
 
     # HTTP only
     def supported_protocols
-      [:http]
+      [:https]
     end
 
     private # ---------------------------------------------------------------
@@ -49,8 +56,8 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      { :query => query.sanitized_text,
-        :key => configuration.api_key,
+      {
+        :query => query.sanitized_text,
         :encoding => "utf-8",
         :coord => "latlng",
         :output => "json"

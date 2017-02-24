@@ -274,7 +274,7 @@ module Geocoder
         uri = URI.parse(query_url(query))
         Geocoder.log(:debug, "Geocoder: HTTP request being made for #{uri.to_s}")
         http_client.start(uri.host, uri.port, use_ssl: use_ssl?, open_timeout: configuration.timeout, read_timeout: configuration.timeout) do |client|
-          req = Net::HTTP::Get.new(uri.request_uri, configuration.http_headers)
+          req = Net::HTTP::Get.new(uri.request_uri, http_headers)
           if configuration.basic_auth[:user] and configuration.basic_auth[:password]
             req.basic_auth(
               configuration.basic_auth[:user],
@@ -305,6 +305,10 @@ module Geocoder
             "The #{query.lookup.name} API requires a key to be configured: " +
             parts_string.inspect
         end
+      end
+
+      def http_headers
+        configuration.http_headers
       end
 
       ##
