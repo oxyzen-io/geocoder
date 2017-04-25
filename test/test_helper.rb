@@ -366,6 +366,13 @@ module Geocoder
       end
     end
 
+    require 'geocoder/lookups/amap'
+    class Amap
+      private
+      def default_fixture_filename
+        "amap_shanghai_pearl_tower"
+      end
+    end
 
   end
 end
