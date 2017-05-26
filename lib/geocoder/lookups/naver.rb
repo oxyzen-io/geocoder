@@ -14,8 +14,8 @@ module Geocoder::Lookup
 
     def query_url(query)
       (query.reverse_geocode? ?
-        "#{protocol}://openapi.map.naver.com/v1/map/reversegeocode?" :
-        "#{protocol}://openapi.map.naver.com/v1/map/geocode?") +
+        "#{protocol}://openapi.naver.com/v1/map/reversegeocode?" :
+        "#{protocol}://openapi.naver.com/v1/map/geocode?") +
       url_query_string(query)
     end
 
