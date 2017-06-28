@@ -374,6 +374,14 @@ module Geocoder
       end
     end
 
+    require 'geocoder/lookups/pickpoint'
+    class Pickpoint
+      private
+      def fixture_prefix
+        "pickpoint"
+      end
+    end
+
   end
 end
 
