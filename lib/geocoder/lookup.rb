@@ -53,8 +53,8 @@ module Geocoder
         :ban_data_gouv_fr,
         :test,
         :latlon,
-        :amap
-        :naver,
+        :amap,
+        :naver
       ]
     end
 
