@@ -6,7 +6,7 @@ module Geocoder
       # Is this object geocoded? (Does it have latitude and longitude?)
       #
       def geocoded?
-        to_coordinates.compact.size > 0
+        to_coordinates.compact.size == 2
       end
 
       ##
@@ -102,7 +102,8 @@ module Geocoder
         # If result is Korea, we use Naver rather than the setting by force.
         if !reverse and results.present? and results.first.country_code == 'KR'
           begin
-            results = Geocoder::Lookup::Naver.new.search(query, query_options)
+            query_options[:lookup] = :naver
+            results = Geocoder.search(query, query_options)
           rescue
           end
         end
